@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saw:report xmlns:saw="com.siebel.analytics.web/report/v1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:sawx="com.siebel.analytics.web/expression/v1.1" xmlVersion="201201160">
+   <saw:criteria xsi:type="saw:simpleCriteria" subjectArea="&quot;Statistics-Reservations Daily&quot;" withinHierarchy="true">
+      <saw:columns>
+         <saw:column xsi:type="saw:regularColumn" columnID="prop">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Property Details"."Property"</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Property</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="confno">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Bookings - Reservation - Details"."Confirmation Number"</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Confirmation #</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="arrival_date_sa">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Bookings - Reservation - Details"."Arrival Date"</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Arrival Date</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="arrival_year">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">YEAR("Statistics-Reservations Daily"."Bookings - Reservation - Details"."Arrival Date")</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Arrival Year</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="arrival_month_num">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">MONTH("Statistics-Reservations Daily"."Bookings - Reservation - Details"."Arrival Date")</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Arrival Month #</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="rev_arrival">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">REPORT_SUM("Statistics-Reservations Daily"."Revenue Details"."Room Revenue" BY "Statistics-Reservations Daily"."Bookings - Reservation - Details"."Confirmation Number")</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Revenue (Arrival Attribution)</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="rns_arrival">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">REPORT_SUM("Statistics-Reservations Daily"."Room Details"."Room Nights" BY "Statistics-Reservations Daily"."Bookings - Reservation - Details"."Confirmation Number")</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Nights (Arrival Attribution)</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="adr_arrival">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">CASE WHEN REPORT_SUM("Statistics-Reservations Daily"."Room Details"."Room Nights" BY "Statistics-Reservations Daily"."Bookings - Reservation - Details"."Confirmation Number") &lt;&gt; 0 THEN REPORT_SUM("Statistics-Reservations Daily"."Revenue Details"."Room Revenue" BY "Statistics-Reservations Daily"."Bookings - Reservation - Details"."Confirmation Number") / REPORT_SUM("Statistics-Reservations Daily"."Room Details"."Room Nights" BY "Statistics-Reservations Daily"."Bookings - Reservation - Details"."Confirmation Number") END</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>ADR (Arrival Attribution)</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="market_proxy">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">REPORT_MIN("Statistics-Reservations Daily"."Marketing"."Market Code" BY "Statistics-Reservations Daily"."Bookings - Reservation - Details"."Confirmation Number")</sawx:expr>
+            </saw:columnFormula>
+            <saw:columnHeading>
+               <saw:caption fmt="text">
+                  <saw:text>Market Code</saw:text>
+               </saw:caption>
+            </saw:columnHeading>
+         </saw:column>
+         <saw:column xsi:type="saw:regularColumn" columnID="cfe66c3e7b012ca2f">
+            <saw:columnFormula>
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Bookings - Reservation - Stay Details"."Reservation Type"</sawx:expr>
+            </saw:columnFormula>
+         </saw:column>
+      </saw:columns>
+      <saw:filter>
+         <sawx:expr xsi:type="sawx:logical" op="and">
+            <sawx:expr xsi:type="sawx:comparison" op="greater">
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Revenue Details"."Room Revenue"</sawx:expr>
+               <sawx:expr xsi:type="xsd:decimal">0</sawx:expr>
+            </sawx:expr>
+            <sawx:expr xsi:type="sawx:list" op="notIn">
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Marketing"."Market Code"</sawx:expr>
+               <sawx:expr xsi:type="xsd:string">CMP</sawx:expr>
+               <sawx:expr xsi:type="xsd:string">HSE</sawx:expr>
+            </sawx:expr>
+            <sawx:expr xsi:type="sawx:comparison" op="notEqual">
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Bookings - Reservation - Stay Details"."Reservation Type"</sawx:expr>
+               <sawx:expr xsi:type="xsd:string">CANCEL</sawx:expr>
+            </sawx:expr>
+            <sawx:expr xsi:type="sawx:comparison" op="equal">
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Bookings - Reservation - Details"."Arrival Date"</sawx:expr>
+               <sawx:expr xsi:type="xsd:date">2025-02-01</sawx:expr>
+            </sawx:expr>
+            <sawx:expr xsi:type="sawx:comparison" op="equal">
+               <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Property Details"."Property"</sawx:expr>
+               <sawx:expr xsi:type="xsd:string">BLOOMSB</sawx:expr>
+            </sawx:expr>
+         </sawx:expr>
+      </saw:filter>
+   </saw:criteria>
+   <saw:views currentView="0">
+      <saw:view xsi:type="saw:compoundView" name="compoundView!1">
+         <saw:cvTable>
+            <saw:cvRow>
+               <saw:cvCell viewName="titleView!1"/>
+            </saw:cvRow>
+            <saw:cvRow>
+               <saw:cvCell viewName="tableView!1"/>
+            </saw:cvRow>
+         </saw:cvTable>
+      </saw:view>
+      <saw:view xsi:type="saw:titleView" name="titleView!1" includeName="true" startedDisplay="none">
+         <saw:title>
+            <saw:caption fmt="text">
+               <saw:text>Suite Production — Arrival Attribution (Numeric Month Prompt)</saw:text>
+            </saw:caption>
+         </saw:title>
+      </saw:view>
+      <saw:view xsi:type="saw:tableView" name="tableView!1" scrollingEnabled="false" rowsPerPage="10000" repeat="false">
+         <saw:edges>
+            <saw:edge axis="row" showColumnHeader="true">
+               <saw:edgeLayers>
+                  <saw:edgeLayer type="column" columnID="prop"/>
+                  <saw:edgeLayer type="column" columnID="arrival_year"/>
+                  <saw:edgeLayer type="column" columnID="arrival_month_num"/>
+                  <saw:edgeLayer type="column" columnID="arrival_date_sa"/>
+                  <saw:edgeLayer type="column" columnID="confno"/>
+                  <saw:edgeLayer type="column" columnID="rev_arrival"/>
+                  <saw:edgeLayer type="column" columnID="rns_arrival"/>
+                  <saw:edgeLayer type="column" columnID="adr_arrival"/>
+                  <saw:edgeLayer type="column" columnID="market_proxy"/>
+                  <saw:edgeLayer type="column" columnID="cfe66c3e7b012ca2f"/>
+               </saw:edgeLayers>
+            </saw:edge>
+            <saw:edge axis="column" showColumnHeader="rollover"/>
+            <saw:edge axis="page" showColumnHeader="true"/>
+            <saw:edge axis="section"/>
+         </saw:edges>
+      </saw:view>
+   </saw:views>
+   <saw:prompts scope="report" subjectArea="&quot;Statistics-Reservations Daily&quot;">
+      <saw:promptStep>
+         <saw:individualPrompts>
+            <saw:prompt xsi:type="saw:columnFilterPrompt" columnID="c12" subjectArea="&quot;Statistics-Reservations Daily&quot;" required="false">
+               <saw:formula>
+                  <sawx:expr xsi:type="sawx:sqlExpression">"Statistics-Reservations Daily"."Property Details"."Property"</sawx:expr>
+               </saw:formula>
+               <saw:promptOperator op="in"/>
+               <saw:promptUIControl xsi:type="saw:browse" maxChoices="-1" includeAllChoices="false">
+                  <saw:customWidth width="120" using="custompixels"/>
+               </saw:promptUIControl>
+               <saw:promptDefaultValues type="reportDefault" usingCodeValue="false"/>
+               <saw:label>
+                  <saw:caption>
+                     <saw:text>Property</saw:text>
+                  </saw:caption>
+               </saw:label>
+               <saw:constrainPrompt type="none" autoSelectValue="default"/>
+               <saw:setPromptVariables>
+                  <saw:setPromptVariable location="value" type="none" variableFormula=""/>
+               </saw:setPromptVariables>
+               <saw:promptSource xsi:type="saw:allChoices"/>
+            </saw:prompt>
+            <saw:prompt xsi:type="saw:variablePrompt" columnID="c15n" required="false">
+               <saw:promptUIControl xsi:type="saw:dropDown" maxChoices="1"/>
+               <saw:promptSource xsi:type="saw:choiceList" dataType="numeric" useCaptionOnly="true">
+                  <saw:promptChoices>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>1</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>2</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>3</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>4</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>5</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>6</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>7</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>8</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>9</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>10</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>11</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                     <saw:promptChoice>
+                        <saw:caption>
+                           <saw:text>12</saw:text>
+                        </saw:caption>
+                     </saw:promptChoice>
+                  </saw:promptChoices>
+               </saw:promptSource>
+               <saw:setPromptVariables>
+                  <saw:setPromptVariable location="value" type="presentationVariable" variableFormula="pv_arrival_month_num"/>
+               </saw:setPromptVariables>
+               <saw:label>
+                  <saw:caption>
+                     <saw:text>Arrival Month #</saw:text>
+                  </saw:caption>
+               </saw:label>
+               <saw:promptDefaultValues type="reportDefault" usingCodeValue="false">
+                  <saw:promptDefaultValue>5</saw:promptDefaultValue>
+               </saw:promptDefaultValues>
+               <saw:promptOperator/>
+               <saw:constrainPrompt type="none" autoSelectValue="default"/>
+            </saw:prompt>
+            <saw:prompt xsi:type="saw:variablePrompt" columnID="c16" required="false">
+               <saw:promptUIControl xsi:type="saw:editBox"/>
+               <saw:promptSource xsi:type="saw:choiceList" dataType="numeric" useCaptionOnly="true">
+                  <saw:promptChoices/>
+               </saw:promptSource>
+               <saw:setPromptVariables>
+                  <saw:setPromptVariable location="value" type="presentationVariable" variableFormula="pv_arrival_year"/>
+               </saw:setPromptVariables>
+               <saw:label>
+                  <saw:caption>
+                     <saw:text>Year</saw:text>
+                  </saw:caption>
+               </saw:label>
+               <saw:promptDefaultValues type="specificValue" usingCodeValue="false">
+                  <saw:promptDefaultValue>2025</saw:promptDefaultValue>
+               </saw:promptDefaultValues>
+            </saw:prompt>
+         </saw:individualPrompts>
+      </saw:promptStep>
+   </saw:prompts>
+</saw:report>
