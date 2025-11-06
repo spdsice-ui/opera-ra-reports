@@ -59,21 +59,9 @@
             <saw:columnHeading>
                <saw:caption fmt="text">
                   <saw:text>Market Code</saw:text></saw:caption></saw:columnHeading>      </saw:column>    
-         <saw:column xsi:type="saw:regularColumn" columnID="c46e94411e214b955">
-            <saw:columnFormula>
-               <sawx:expr xsi:type="sawx:sqlExpression">"Bookings - Reservation - Daily Details"."Room Type Description"</sawx:expr></saw:columnFormula></saw:column>
-         <saw:column xsi:type="saw:regularColumn" columnID="ccdb9c46e1d20f99a">
-            <saw:columnFormula>
-               <sawx:expr xsi:type="sawx:sqlExpression">"Bookings - Reservation - Daily Details"."Room Type to Charge Description"</sawx:expr></saw:columnFormula></saw:column>
-         <saw:column xsi:type="saw:regularColumn" columnID="cbd3f9a6d88ae1965">
-            <saw:columnFormula>
-               <sawx:expr xsi:type="sawx:sqlExpression">"Bookings - Reservation - Daily Details"."Rate Code"</sawx:expr></saw:columnFormula></saw:column>
-         <saw:column xsi:type="saw:regularColumn" columnID="cd3da05fecab58951">
-            <saw:columnFormula>
-               <sawx:expr xsi:type="sawx:sqlExpression">"Bookings - Reservation - Daily Details"."Stay Date"</sawx:expr></saw:columnFormula></saw:column>
          <saw:column xsi:type="saw:regularColumn" columnID="cfe66c3e7b012ca2f">
             <saw:columnFormula>
-               <sawx:expr xsi:type="sawx:sqlExpression">"Bookings - Reservation - Stay Details"."Reservation Type"</sawx:expr></saw:columnFormula></saw:column></saw:columns>    
+               <sawx:expr xsi:type="sawx:sqlExpression">"Bookings - Reservation - Stay Details"."Reservation Type"</sawx:expr></saw:columnFormula></saw:column></saw:columns>
       <saw:filter>      
          <sawx:expr xsi:type="sawx:logical" op="and">                
             <sawx:expr xsi:type="sawx:comparison" op="greater">          
@@ -117,12 +105,8 @@
                         <saw:edgeLayer type="column" columnID="rev_arrival"/>            
                         <saw:edgeLayer type="column" columnID="rns_arrival"/>            
                         <saw:edgeLayer type="column" columnID="adr_arrival"/>            
-                        <saw:edgeLayer type="column" columnID="market_proxy"/>          
-                        <saw:edgeLayer type="column" columnID="c46e94411e214b955"/>
-                        <saw:edgeLayer type="column" columnID="ccdb9c46e1d20f99a"/>
-                        <saw:edgeLayer type="column" columnID="cbd3f9a6d88ae1965"/>
-                        <saw:edgeLayer type="column" columnID="cfe66c3e7b012ca2f"/>
-                        <saw:edgeLayer type="column" columnID="cd3da05fecab58951"/></saw:edgeLayers>        
+                        <saw:edgeLayer type="column" columnID="market_proxy"/>
+                        <saw:edgeLayer type="column" columnID="cfe66c3e7b012ca2f"/></saw:edgeLayers>
                   </saw:edge>        
                   <saw:edge axis="column" showColumnHeader="rollover"/>        
                   <saw:edge axis="page" showColumnHeader="true"/>        
